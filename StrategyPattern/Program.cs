@@ -52,6 +52,8 @@ namespace StrategyPattern
             #region Template Method
             ICPP icpp = new ICPP();
             IKCV ikcv = new IKCV();
+            IHIT ihit = new IHIT();
+
             Orcamento method = new Orcamento(500);
 
             if (icpp.DeveUsarMaximaTaxacao(method))
@@ -77,6 +79,17 @@ namespace StrategyPattern
             {
                 double ikvc_maxima = ikcv.MinimaTaxacao(method);
                 Console.WriteLine(ikvc_maxima);
+            }
+
+            if (ihit.DeveUsarMaximaTaxacao(method))
+            {
+                double ihit_max = ihit.MaximaTaxacao(method);
+                Console.WriteLine(ihit_max);
+            }
+            else
+            {
+                double ihit_min = ihit.MinimaTaxacao(method);
+                Console.WriteLine(ihit_min);
             }
 
             Console.ReadKey();
