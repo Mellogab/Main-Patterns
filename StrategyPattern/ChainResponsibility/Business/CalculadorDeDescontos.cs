@@ -14,14 +14,14 @@ namespace StrategyPattern.ChainResponsibility.Business
     {
         public double Calcula(Orcamento orcamento)
         {
-            IDesconto d1 = new DescontoPorCincoItens();
-            IDesconto d2 = new DesoncotPorMaisDeQuinhentosReais();
-            IDesconto d3 = new SemDesconto();
+            IDesconto PrimeiraClasse = new DescontoPorCincoItens();
+            IDesconto SegundaClasse = new DesoncotPorMaisDeQuinhentosReais();
+            IDesconto UltimaClasse = new SemDesconto();
 
-            d1.Proximo = d2;
-            d2.Proximo = d3;
+            PrimeiraClasse.Proximo = SegundaClasse;
+            SegundaClasse.Proximo = UltimaClasse;
 
-            return d1.Desconta(orcamento);
+            return PrimeiraClasse.Desconta(orcamento);
         }
     }
 }

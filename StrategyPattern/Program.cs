@@ -3,6 +3,7 @@ using StrategyPattern.Business;
 using StrategyPattern.ChainResponsibility.Business;
 using StrategyPattern.Interfaces;
 using StrategyPattern.Models;
+using StrategyPattern.TemplateMethod.Business;
 
 namespace StrategyPattern
 {
@@ -11,34 +12,34 @@ namespace StrategyPattern
         static void Main(string[] args)
         {
             #region Strategy Pattern
-            Orcamento orcamento = new Orcamento(50);
+            Orcamento strategy = new Orcamento(50);
             Imposto imposto = new ISS();
 
-            new CalculadorDeImpostos().Calculo(orcamento, imposto);
+            new CalculadorDeImpostos().Calculo(strategy, imposto);
 
             imposto = new ICMS();
-            new CalculadorDeImpostos().Calculo(orcamento, imposto);
+            new CalculadorDeImpostos().Calculo(strategy, imposto);
 
             imposto = new ICCC();
-            new CalculadorDeImpostos().Calculo(orcamento, imposto);
+            new CalculadorDeImpostos().Calculo(strategy, imposto);
 
-            Console.ReadKey();
+            
             #endregion
             
             #region Chain Of Resposibility
             try
             {
                 CalculadorDeDescontos calculador = new CalculadorDeDescontos();
-                Orcamento orcamento_ = new Orcamento(500.0);
+                Orcamento chain = new Orcamento(500.0);
 
-                orcamento_.AdicionaItem(new Item("CANETA", 250.0));
-                orcamento_.AdicionaItem(new Item("LAPIS", 250.0));
-                orcamento_.AdicionaItem(new Item("LAPIS", 250.0));
-                orcamento_.AdicionaItem(new Item("LAPIS", 250.0));
-                orcamento_.AdicionaItem(new Item("LAPIS", 250.0));
-                orcamento_.AdicionaItem(new Item("LAPIS", 250.0));
+                chain.AdicionaItem(new Item("CANETA", 250.0));
+                chain.AdicionaItem(new Item("LAPIS", 250.0));
+                chain.AdicionaItem(new Item("LAPIS", 250.0));
+                chain.AdicionaItem(new Item("LAPIS", 250.0));
+                chain.AdicionaItem(new Item("LAPIS", 250.0));
+                chain.AdicionaItem(new Item("LAPIS", 250.0));
                 
-                double desconto = calculador.Calcula(orcamento_);
+                double desconto = calculador.Calcula(chain);
 
                 Console.WriteLine(desconto);
             }
@@ -46,6 +47,39 @@ namespace StrategyPattern
             {
                 Console.WriteLine(ex.Message);
             }
+            #endregion
+
+            #region Template Method
+            ICPP icpp = new ICPP();
+            IKCV ikcv = new IKCV();
+            Orcamento method = new Orcamento(500);
+
+            if (icpp.DeveUsarMaximaTaxacao(method))
+            {
+                double maxima = icpp.MaximaTaxacao(method);
+                Console.WriteLine(maxima);
+            }
+            else
+            {
+                double minima = icpp.MinimaTaxacao(method);
+                Console.WriteLine(minima);
+            }
+
+            method.AdicionaItem(new Item("ITEM 1",500));
+            method.AdicionaItem(new Item("ITEM 1", 500));
+
+            if (ikcv.DeveUsarMaximaTaxacao(method))
+            {
+                double ikvc_minima = ikcv.MaximaTaxacao(method);
+                Console.WriteLine(ikvc_minima);
+            }
+            else
+            {
+                double ikvc_maxima = ikcv.MinimaTaxacao(method);
+                Console.WriteLine(ikvc_maxima);
+            }
+
+            Console.ReadKey();
             #endregion
         }
     }
