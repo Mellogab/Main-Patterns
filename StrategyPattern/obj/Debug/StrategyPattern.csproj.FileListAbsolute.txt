@@ -1,0 +1,5 @@
+C:\Users\RAPHAEL\source\repos\StrategyPattern\StrategyPattern\bin\Debug\StrategyPattern.exe.config
+C:\Users\RAPHAEL\source\repos\StrategyPattern\StrategyPattern\bin\Debug\StrategyPattern.exe
+C:\Users\RAPHAEL\source\repos\StrategyPattern\StrategyPattern\bin\Debug\StrategyPattern.pdb
+C:\Users\RAPHAEL\source\repos\StrategyPattern\StrategyPattern\obj\Debug\StrategyPattern.exe
+C:\Users\RAPHAEL\source\repos\StrategyPattern\StrategyPattern\obj\Debug\StrategyPattern.pdb
